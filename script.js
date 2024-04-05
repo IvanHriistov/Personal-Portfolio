@@ -26,7 +26,7 @@ ScrollReveal({
 ScrollReveal().reveal('.home-bio h1, .about-resume',{origin: 'left'});
 ScrollReveal().reveal('.home-bio p', {origin: 'right'});
 ScrollReveal().reveal('.home-bio, .heading', {origin: 'top'});
-ScrollReveal().reveal('.profile-pic, .about-items, .skills-items, .projects-items, .form ', {origin: 'bottom'});
+ScrollReveal().reveal('.profile-pic, .about-items, .skills-items, .projects-items, .form , #message ', {origin: 'bottom'});
 
 // Typing Animation //
 
@@ -37,3 +37,26 @@ ScrollReveal().reveal('.profile-pic, .about-items, .skills-items, .projects-item
 //   backDelay: 600,
 //   loop: true
 // });
+
+// Send message 
+// Select the form and message element
+const form = document.querySelector('.form');
+const message = document.getElementById('message');
+
+// Function to remove the failure message
+function removeMessage() {
+  message.textContent = ''; // Clear the message
+}
+
+// Add event listener to the form submission
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the default form submission behavior
+  message.textContent = 'Failed to send your message. Please try later or contact the administrator by another method.';
+});
+
+// Add event listeners to other elements to remove the message
+document.querySelectorAll('a, button').forEach(item => {
+  item.addEventListener('click', removeMessage);
+});
+
+window.addEventListener('beforeunload', removeMessage); // Remove message when navigating away from the page
